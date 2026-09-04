@@ -8,8 +8,8 @@
   <a href='https://www.linkedin.com/in/amrahmadsalah/'>
     <img src="https://img.shields.io/badge/LinkedIn-Amr%20Ahmad-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
   </a>
-  <a href='https://youtu.be/1UKmyQ_MMMc'>
-    <img src="https://img.shields.io/badge/LinkedIn-Amr%20Ahmad-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="YouTube">
+  <a href="https://youtu.be/1UKmyQ_MMMc">
+    <img src="https://img.shields.io/badge/YouTube-Watch%20the%20Project%20Walkthrough-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube - Project Walkthrough">
   </a>
 </p>
 
