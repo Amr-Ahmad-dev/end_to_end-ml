@@ -536,7 +536,7 @@ Computer Science student focused on building practical systems across:
 **Python • Data Science • Machine Learning • Automation • Backend Development • AI**
 
 <p align="center">
-  <a href="YOUR_LINKEDIN_URL">
+  <a href="https://www.linkedin.com/in/amrahmadsalah/">
     <img src="https://img.shields.io/badge/Connect%20with%20me%20on%20LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="Connect with me on LinkedIn">
   </a>
 </p>
