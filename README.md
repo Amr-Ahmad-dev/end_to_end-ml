@@ -394,13 +394,13 @@ The pipeline stores visualizations of the data before and after preprocessing.
 ### Before Processing
 
 <p align="center">
-  <img src="https://github.com/Amr-Ahmad-dev/end_to_end-ml/blob/main/preprocessing/preprocessed.png" alt="Dataset before processing" width="850">
+  <img src="https://github.com/Amr-Ahmad-dev/end_to_end-ml/blob/main/preprocessing/feature_distributions_histograms.png" alt="Dataset before processing" width="850">
 </p>
 
 ### After Processing
 
 <p align="center">
-  <img src="https://github.com/Amr-Ahmad-dev/end_to_end-ml/blob/main/preprocessing/processed.png" alt="Dataset after processing" width="850">
+  <img src="https://github.com/Amr-Ahmad-dev/end_to_end-ml/blob/main/processed/feature_distributions_histograms.png" alt="Dataset after processing" width="850">
 </p>
 
 The repository also contains the complete visualization workflow used to inspect the transformations.
