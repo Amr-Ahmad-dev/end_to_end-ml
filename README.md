@@ -1,123 +1,113 @@
-# Chronic Disease Risk Prediction Module
+# Chronic Disease Risk Prediction
+
+<p align="center">
+  <strong>An end-to-end machine learning pipeline for health-data processing, visualization, classification, and reusable prediction.</strong>
+</p>
+
+<p align="center">
+  <a href='https://www.linkedin.com/in/amrahmadsalah/'>
+    <img src="https://img.shields.io/badge/LinkedIn-Amr%20Ahmad-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+  </a>
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python" alt="Python">
-  <img src="https://img.shields.io/badge/Scikit--learn-ML-orange?style=for-the-badge&logo=scikit-learn" alt="Scikit-learn">
   <img src="https://img.shields.io/badge/Pandas-Data%20Processing-150458?style=for-the-badge&logo=pandas" alt="Pandas">
-  <img src="https://img.shields.io/badge/Status-Experimental-yellow?style=for-the-badge" alt="Status">
-</p>
-
-<p align="center">
-  <strong>An end-to-end data processing and machine learning pipeline for experimental chronic-disease risk classification.</strong>
-</p>
-
-<p align="center">
-  <a href="https://www.linkedin.com/in/amrahmadsalah/">
-    <img src="https://img.shields.io/badge/LinkedIn-Amr%20Ahmad-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
-  </a>
+  <img src="https://img.shields.io/badge/Scikit--learn-Machine%20Learning-F7931E?style=for-the-badge&logo=scikit-learn" alt="Scikit-learn">
+  <img src="https://img.shields.io/badge/Status-Experimental-yellow?style=for-the-badge" alt="Experimental">
 </p>
 
 ---
 
 ## Objective
 
-The objective of this project was to build a complete, reusable machine-learning workflow that starts with health-related data and ends with a directly usable prediction module.
+This project was built to explore the complete path from health-related tabular data to a reusable machine-learning prediction module.
 
-Rather than focusing only on training a model, the project was designed around the complete pipeline:
+The objective was not simply to train a classifier.
 
-**Data → Understanding → Visualization → Preprocessing → Feature Engineering → Model → Evaluation → Reusable Module → User Interface**
+The project combines:
 
-The project was also an experiment in understanding how preprocessing decisions, feature representation, class imbalance, and evaluation metrics affect a classification system.
+**Data Understanding → Visualization → Cleaning → Preprocessing → Feature Engineering → Class Balancing → Model Training → Evaluation → Model Serialization → Prediction Interface**
 
-> **Important:** This project is an experimental machine-learning project and is **not a medical diagnostic or clinical decision-making system**. The dataset, target construction, and model performance have significant limitations.
+The resulting system separates the experimentation pipeline from the final prediction module, allowing the trained model to be used independently of the complete data-processing workflow.
 
----
-
-## What I Built
-
-The project contains two layers.
-
-### 1. Full Data & ML Pipeline
-
-The complete pipeline allows the data to be:
-
-* inspected and understood
-* cleaned
-* transformed
-* visualized before preprocessing
-* processed and visualized again
-* used for feature engineering
-* used to create/train the model
-* evaluated using classification metrics
-* stored for later use
-
-The goal was to make these operations accessible through a single pipeline interface rather than scattering the workflow across notebooks and independent scripts.
-
-### 2. Standalone Prediction Module
-
-The final trained model is packaged as:
-
-```text
-disease/module.joblib
-```
-
-The standalone module can be used independently of the complete data-processing workflow.
-
-This means an application does not need to reproduce the entire experimentation pipeline simply to make a prediction.
+> **Disclaimer:** This is an experimental machine-learning project for educational and engineering purposes. It is **not a medical diagnostic system**, and its predictions should not be used for medical decisions.
 
 ---
 
-# Project Architecture
+# Pipeline Overview
 
 ```text
-                         ┌──────────────────────┐
-                         │       Raw Data       │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │      data.py         │
-                         │   Pipeline Interface │
-                         └──────────┬───────────┘
-                                    │
-                 ┌──────────────────┼──────────────────┐
-                 │                  │                  │
-                 ▼                  ▼                  ▼
-          Data Cleaning      Visualization       Preprocessing
-                 │                  │                  │
-                 └──────────────────┼──────────────────┘
-                                    ▼
-                         ┌──────────────────────┐
-                         │ Feature Engineering  │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │   Model Training     │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │ Evaluation & Storage │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │   module.joblib      │
-                         │   Trained Model      │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │     module.py        │
-                         │ Prediction Interface │
-                         └──────────┬───────────┘
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │   User Application   │
-                         └──────────────────────┘
+                         RAW HEALTH DATA
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │     data.py         │
+                    │   Pipeline Class    │
+                    └──────────┬──────────┘
+                               │
+              ┌────────────────┼────────────────┐
+              │                │                │
+              ▼                ▼                ▼
+          Inspection      Visualization      Cleaning
+              │                │                │
+              └────────────────┼────────────────┘
+                               ▼
+                       Preprocessing
+                               │
+                               ▼
+                     Feature Engineering
+                               │
+                               ▼
+                     Class-Balanced Training
+                               │
+                               ▼
+                         Evaluation
+                               │
+                               ▼
+                     ┌─────────────────┐
+                     │ module.joblib   │
+                     │  Trained Model  │
+                     └────────┬────────┘
+                              │
+                              ▼
+                     ┌─────────────────┐
+                     │   module.py     │
+                     │ Prediction API  │
+                     └────────┬────────┘
+                              │
+                              ▼
+                     Interactive Application
 ```
+
+---
+
+# What the Project Does
+
+The dataset contains a mixture of binary and continuous health-related variables.
+
+The pipeline was designed to examine and transform the data before it reached the model.
+
+The workflow includes:
+
+* dataset inspection
+* feature-type handling
+* distribution analysis
+* correlation analysis
+* data cleaning
+* preprocessing
+* feature scaling
+* feature engineering
+* class-imbalance handling
+* visualization before and after processing
+* model training
+* classification evaluation
+* model serialization
+* reusable prediction
+
+One of the main goals was to make preprocessing observable.
+
+Instead of simply transforming the dataset and sending the result to a model, the pipeline generates visualizations before and after processing so the effect of the transformation can be examined directly.
 
 ---
 
@@ -128,8 +118,8 @@ This means an application does not need to reproduce the entire experimentation 
 ├── disease/
 │   └── module.joblib
 │
-├── visualization.py
 ├── data.py
+├── visualization.py
 ├── module.py
 │
 ├── preprocessed.png
@@ -138,25 +128,21 @@ This means an application does not need to reproduce the entire experimentation 
 └── README.md
 ```
 
-## File Responsibilities
-
 ### `data.py`
 
-The main development and experimentation interface.
+The main interface for the complete data-processing and machine-learning pipeline.
 
-This is where the pipeline is controlled.
+The pipeline class in this file is the primary interface for:
 
-It provides access to the workflow responsible for:
+* cleaning data
+* preprocessing data
+* creating the model
+* training the model
+* evaluating the model
+* visualizing data before processing
+* visualizing data after processing
 
-* cleaning the dataset
-* preprocessing
-* feature engineering
-* model creation
-* model evaluation
-* visualization
-* comparing the dataset before and after processing
-
-The pipeline class in this file is the primary class to interact with when reproducing the complete workflow.
+This is the file to use when reproducing or modifying the complete workflow.
 
 ---
 
@@ -164,366 +150,386 @@ The pipeline class in this file is the primary class to interact with when repro
 
 Contains the visualization functionality used by the pipeline.
 
-It is responsible for generating visual representations of the data before and after preprocessing.
+It is responsible for examining the dataset visually and generating the before/after comparisons used during preprocessing.
 
-The purpose is not simply to create plots, but to make the effect of preprocessing observable.
-
-For example:
-
-```text
-             BEFORE PROCESSING
-                    │
-                    ▼
-             ┌─────────────┐
-             │ Raw Dataset │
-             └──────┬──────┘
-                    │
-              Visualization
-                    │
-                    ▼
-             ───────────────
-                    │
-                    ▼
-             Data Processing
-                    │
-                    ▼
-             ───────────────
-                    │
-                    ▼
-              AFTER PROCESSING
-```
-
-The project includes representative before/after visualizations showing these transformations.
+The file is primarily consumed by the pipeline rather than being the main interface for users.
 
 ---
 
 ### `module.py`
 
-The production-facing interaction layer for the trained model.
+The direct interface to the finished chronic-disease prediction module.
 
-If you only want to use the finished chronic-disease model rather than reproduce the entire data-processing workflow, this is the file you need.
-
-It loads:
-
-```text
-disease/module.joblib
-```
-
-and provides the interface required to interact with the trained model.
+This is the file to use when the goal is simply to interact with the trained model rather than reproduce the complete data-processing workflow.
 
 ---
 
 ### `disease/module.joblib`
 
-The serialized trained machine-learning model.
+Serialized trained machine-learning model.
 
-This is the core artifact of the finished module.
+This is the actual model artifact consumed by `module.py`.
 
-If you only want to integrate the trained model into another application, you do **not** need the complete experimentation pipeline.
+---
 
-You only need:
+# Minimal Usage
+
+If you only want to use the finished model, you only need:
 
 ```text
 module.py
 disease/module.joblib
 ```
 
+The complete data-processing and visualization files are not required for basic model interaction.
+
+Conceptually:
+
+```text
+module.py
+     │
+     ▼
+module.joblib
+     │
+     ▼
+prediction
+```
+
+This separation allows the final model to be integrated into another application without requiring the entire experimental pipeline.
+
 ---
 
-# Two Ways to Use the Project
+# Full Pipeline vs. Standalone Module
 
-## Full Pipeline
+There are two distinct ways to interact with the project.
 
-Use this if you want to reproduce or study the complete workflow.
+### Full Pipeline
 
 ```text
 data.py
-    +
+   +
 visualization.py
-    +
+   +
 dataset
 ```
 
-This gives access to the data-processing and visualization pipeline.
+Use this when you want to:
 
-It is intended for experimentation, analysis, and understanding how the model was constructed.
+* inspect the dataset
+* reproduce preprocessing
+* visualize transformations
+* modify the pipeline
+* retrain the model
+* experiment with the workflow
 
----
-
-## Standalone Model
-
-Use this if you only want to make predictions.
+### Standalone Prediction
 
 ```text
 module.py
-    +
+   +
 disease/module.joblib
 ```
 
-This is the minimal version required to interact with the finished model.
+Use this when you only want to:
 
-The distinction is intentional:
+* load the trained model
+* provide a user's feature values
+* obtain a prediction
+* integrate the model into an application
 
-> **Development pipeline ≠ deployed prediction module**
+This distinction is intentional.
 
-The preprocessing and experimentation code is separated from the final model interface so that the trained model can be consumed independently.
+**The development pipeline and the prediction interface are separate components.**
 
 ---
 
-# Data Processing Pipeline
+# Data Transformation
 
-The workflow follows a structured sequence:
+The original data was already substantially structured and contained no missing values.
 
 ```text
-1. Data Acquisition
-        ↓
-2. Data Understanding
-        ↓
-3. Data Cleaning
-        ↓
-4. Data Visualization
-        ↓
-5. Feature Engineering
-        ↓
-6. Preprocessing
-        ↓
-7. Class-Imbalance Handling
-        ↓
-8. Model Training
-        ↓
-9. Model Evaluation
-        ↓
-10. Model Serialization
-        ↓
-11. Prediction Interface
+Dataset
+253,680 rows
+20 columns
+
+Missing rows:
+0
+
+Missing values:
+0%
 ```
 
-A major purpose of the project was to make the transformation of the dataset observable rather than treating preprocessing as an invisible step before model training.
+The pipeline nevertheless performs additional processing because clean data does not necessarily mean model-ready data.
+
+The dataset contained:
+
+* binary variables
+* continuous variables
+* different feature scales
+* overlapping feature distributions
+* correlated variables
+* class imbalance
+
+Consequently, preprocessing focused on transforming the representation of the data rather than simply filling missing values.
 
 ---
 
-# Data Characteristics
+# Training Data
 
-The dataset contains a mixture of health-related variables, including binary and continuous features.
+The final run reported:
 
-Several characteristics required consideration during preprocessing and modeling:
+| Dataset                |    Rows |
+| ---------------------- | ------: |
+| Original training rows | 183,120 |
+| Clean training rows    | 137,456 |
+| Removed training rows  |  45,664 |
+| Test rows              |  45,781 |
 
-* different feature scales
-* heterogeneous feature types
-* overlapping feature distributions
-* class imbalance
-* relatively weak relationships between some features and the target
-* correlations between variables
-* experimentally constructed target representation
+Approximately **24.9% of the original training rows were removed during the cleaning stage**.
 
-The data was therefore examined before preprocessing and again after processing.
+The test set was kept separate from the training data.
+
+> The README intentionally does not label the removed rows as "missing data" because the original dataset contained zero missing rows. The exact removal criteria should be documented in `data.py` if this repository is intended for reproducibility.
 
 ---
 
 # Class Imbalance
 
-The target classes were not evenly distributed.
+The test set contained:
 
-Because of this, accuracy alone was not considered sufficient for evaluating the classifier.
+```text
+Negative: 34,761
+Positive: 11,020
+```
 
-The training process therefore incorporated class balancing so that errors involving the less represented class were given greater importance.
+This represents an imbalanced classification problem.
 
-The model was intentionally oriented toward **recall** rather than maximizing raw accuracy.
+Because of this imbalance, accuracy was not treated as the only meaningful evaluation criterion.
 
-This reflects the experimental objective of reducing false negatives.
+The training process incorporated class weighting so that the minority/positive class received greater importance during optimization.
+
+The decision was deliberately oriented toward **high recall**.
+
+In other words:
+
+> Missing a positive case was considered more costly than generating additional false positives.
+
+This produced a high sensitivity model, but at the cost of substantially lower precision.
 
 ---
 
 # Model Performance
 
-The current experimental model produced approximately:
+Final evaluation on the held-out test set:
 
-| Metric   |  Result |
-| -------- | ------: |
-| Accuracy | **67%** |
-| Recall   | **88%** |
+| Metric               |      Score |
+| -------------------- | ---------: |
+| Accuracy             | **61.89%** |
+| Balanced Accuracy    | **71.90%** |
+| Precision            | **37.89%** |
+| Recall               | **91.21%** |
+| Specificity          | **52.60%** |
+| F1 Score             | **53.54%** |
+| ROC-AUC              | **82.23%** |
+| PR-AUC               | **57.68%** |
+| Log Loss             | **0.5609** |
+| Matthews Correlation | **0.3794** |
 
-Recall was prioritized because the experiment placed greater importance on identifying positive cases than on minimizing every false positive.
+### Confusion Matrix
 
-However, these numbers should not be interpreted independently.
+```text
+                    Predicted
+                  0          1
 
-Model performance should be evaluated using the complete set of relevant classification metrics, including:
+Actual 0       18,285     16,476
+Actual 1          969     10,051
+```
 
-* precision
-* recall
-* F1-score
-* specificity
-* confusion matrix
-* ROC-AUC / PR-AUC where appropriate
+The classifier correctly identified:
 
-The reported performance is specific to this dataset, preprocessing procedure, target definition, model, and evaluation methodology.
+**10,051 of 11,020 positive cases.**
 
-It should not be interpreted as evidence of clinical predictive validity.
+That corresponds to approximately:
+
+**91.21% recall.**
+
+However, it also produced:
+
+**16,476 false positives.**
+
+This explains why the model has high recall but relatively low precision.
+
+The result is therefore better described as a **high-sensitivity classifier** rather than a highly accurate classifier.
 
 ---
 
-# Before & After Processing
+# Interpreting the Results
 
-The pipeline stores visualizations of the dataset before and after processing.
+The model demonstrates a meaningful ability to separate the classes:
+
+**ROC-AUC = 0.8223**
+
+while the selected classification threshold produces:
+
+**Recall = 91.21%**
+
+at the cost of:
+
+**Precision = 37.89%**
+
+This illustrates an important machine-learning tradeoff.
+
+Increasing sensitivity can substantially increase the number of false positives.
+
+Therefore, the model's performance cannot be summarized responsibly by reporting only its 91% recall.
+
+The appropriate interpretation depends on the intended cost of false negatives versus false positives.
+
+---
+
+# Before & After Visualization
+
+The pipeline stores visualizations of the data before and after preprocessing.
 
 ### Before Processing
 
 <p align="center">
-  <img src="preprocessed.png" alt="Data before processing" width="800">
+  <img src="preprocessed.png" alt="Dataset before processing" width="850">
 </p>
 
 ### After Processing
 
 <p align="center">
-  <img src="processed.png" alt="Data after processing" width="800">
+  <img src="processed.png" alt="Dataset after processing" width="850">
 </p>
 
-These visualizations are included to demonstrate the transformation performed by the preprocessing pipeline rather than simply reporting the final model score.
+The repository also contains the complete visualization workflow used to inspect the transformations.
 
 ---
 
-# Example Workflow
+# Key Engineering Idea
 
-For the complete pipeline:
+The main architectural decision was to avoid coupling the final prediction interface to the entire experimentation pipeline.
 
-```python
-from data import Pipeline
-
-pipeline = Pipeline(...)
-
-# Clean and process the data
-pipeline.clean()
-
-# Create/train the model
-pipeline.create_model()
-
-# Visualize the data
-pipeline.visualize()
-```
-
-The exact constructor and method arguments depend on the implementation in `data.py`.
-
-For direct interaction with the finished model:
-
-```python
-from module import ChronicDiseaseModule
-
-model = ChronicDiseaseModule(...)
-
-prediction = model.predict(...)
-```
-
-Refer to `module.py` for the exact interface.
-
----
-
-# Design Philosophy
-
-The project was built around a simple principle:
-
-> **A machine-learning model is only one component of a larger data system.**
-
-The workflow therefore separates:
+The development workflow is:
 
 ```text
-Data acquisition
-      ↓
-Data understanding
-      ↓
-Data processing
-      ↓
-Visualization
-      ↓
-Modeling
-      ↓
+Data
+ ↓
+Analysis
+ ↓
+Cleaning
+ ↓
+Preprocessing
+ ↓
+Feature Engineering
+ ↓
+Training
+ ↓
+Evaluation
+```
+
+while the final application workflow is:
+
+```text
+User Input
+ ↓
+module.py
+ ↓
+module.joblib
+ ↓
 Prediction
 ```
 
-This makes it possible to inspect the data transformation process, experiment with preprocessing decisions, evaluate the model, and finally expose the trained model through a reusable interface.
+This makes the final model easier to reuse.
 
-The final interface is intentionally lightweight. Its purpose is to demonstrate that the trained module can be integrated into an application rather than to serve as a polished commercial frontend.
+The application does not need to know how the dataset was originally explored or how the training experiment was conducted.
 
 ---
 
-# What This Project Taught Me
+# What I Learned
 
-This project reinforced several practical lessons about machine learning:
+### Data quality is not the same as model readiness
 
-**1. Preprocessing does not create information.**
+A dataset can contain zero missing values and still require substantial preprocessing.
 
-If the underlying features have weak relationships with the target, better preprocessing can improve representation but cannot manufacture predictive signal.
+### Accuracy is not enough
 
-**2. Accuracy can be misleading with imbalanced classes.**
+With imbalanced classes, accuracy can hide poor minority-class performance.
 
-A classifier can achieve respectable accuracy while performing poorly on the class that matters.
+This project made the tradeoff between precision and recall particularly clear.
 
-**3. Feature engineering can change the problem representation.**
+### Preprocessing cannot manufacture predictive signal
 
-Combining related variables into a meaningful target representation can alter the learning problem and its statistical properties.
+If the underlying features have weak relationships with the target, transformations can improve representation but cannot create information that does not exist.
 
-**4. Visualization should be part of the pipeline.**
+### Feature engineering changes the learning problem
 
-Visualizing the data before and after processing makes preprocessing decisions easier to inspect and validate.
+Combining related variables into a target representation can alter the statistical structure of the classification problem and therefore needs to be treated as part of the modeling decision.
 
-**5. A trained model should be separated from experimentation code.**
+### Visualization is part of validation
 
-Once the model is trained, applications should be able to consume the resulting artifact without reproducing the entire development workflow.
+The before/after visualization stage makes preprocessing effects inspectable instead of treating preprocessing as a black box.
+
+### Reusable modules matter
+
+The final `module.py + module.joblib` interface separates model consumption from model development.
 
 ---
 
 # Limitations
 
-This project has important limitations.
+This project should be interpreted as an engineering and machine-learning experiment.
 
-* It is an experimental machine-learning project.
-* The dataset has limited predictive relationships with the constructed target.
-* The classes are imbalanced.
-* Model performance is dataset-specific.
-* The target construction is experimental.
-* The model has not undergone clinical validation.
-* The model should not be used for medical diagnosis or treatment decisions.
-* High recall does not imply clinical usefulness.
-* Further validation on independent data would be required before making stronger claims about generalization.
+Important limitations include:
 
-These limitations are part of the experiment rather than something the project attempts to hide.
+* the dataset provides limited predictive information for the constructed target
+* the classes are imbalanced
+* the chosen threshold favors recall over precision
+* the model produces a substantial number of false positives
+* the target construction is experimental
+* performance is specific to this dataset and evaluation procedure
+* no clinical validation was performed
+* no claim of clinical usefulness is being made
+* the model should not be used for diagnosis, treatment, or medical decision-making
+
+The reported metrics should therefore be understood as **experimental model-performance measurements**, not medical risk estimates.
 
 ---
 
-# Future Improvements
+# Future Work
 
 Potential improvements include:
 
-* stronger validation methodology
-* independent test data
 * cross-validation
-* systematic hyperparameter optimization
+* stronger baseline comparisons
 * threshold optimization
-* calibration analysis
-* additional imbalance-handling techniques
+* probability calibration
+* independent external validation
+* systematic hyperparameter optimization
 * feature-selection analysis
-* comparison against multiple baseline models
-* more rigorous leakage detection
-* improved experiment tracking
+* leakage auditing
 * model explainability
-* API deployment
+* experiment tracking
 * automated testing
+* API deployment
 * containerization
 
 ---
 
 # Technologies
 
-```text
-Python
-Pandas
-NumPy
-Scikit-learn
-Matplotlib
-Seaborn
-Joblib
-```
+<p align="center">
 
-Additional libraries may be required depending on the implementation of the current modules.
+<img src="https://img.shields.io/badge/Python-blue?style=flat-square&logo=python&logoColor=white">
+<img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white">
+<img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white">
+<img src="https://img.shields.io/badge/Scikit--learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white">
+<img src="https://img.shields.io/badge/Matplotlib-11557C?style=flat-square">
+<img src="https://img.shields.io/badge/Seaborn-4C72B0?style=flat-square">
+<img src="https://img.shields.io/badge/Joblib-Model%20Serialization-green?style=flat-square">
+
+</p>
 
 ---
 
@@ -531,18 +537,18 @@ Additional libraries may be required depending on the implementation of the curr
 
 ## Amr Ahmad
 
-Computer Science student focused on building practical systems across:
+Computer Science student interested in:
 
-**Python • Data Science • Machine Learning • Automation • Backend Development • AI**
+**Software Engineering · Python · Data Science · Machine Learning · AI · Automation**
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/amrahmadsalah/">
-    <img src="https://img.shields.io/badge/Connect%20with%20me%20on%20LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="Connect with me on LinkedIn">
+  <a href='https://www.linkedin.com/in/amrahmadsalah/'>
+    <img src="https://img.shields.io/badge/Connect%20with%20me%20on%20LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
   </a>
 </p>
 
 ---
 
 <p align="center">
-  <sub>Experimental project developed for learning, engineering practice, and exploration of end-to-end machine-learning workflows.</sub>
+  <sub>Built as an experimental project to understand and implement an end-to-end machine-learning workflow.</sub>
 </p>
